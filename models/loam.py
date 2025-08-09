@@ -3,6 +3,7 @@ from models.database import db
 
 
 class Loan(db.Model):
+    
     __tablename__ = "loans"  # Nome da tabela intermediária
 
     id = db.Column(db.Integer, primary_key=True)  # Chave primária do empréstimo

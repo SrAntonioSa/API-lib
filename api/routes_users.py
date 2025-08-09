@@ -1,14 +1,12 @@
-
-from services.user_management import create_user
-from flask import Flask, jsonify
-
-
-app = Flask(__name__)
+from flask import  jsonify, Blueprint
 
 
 
-@app.route("/create_user", methods = ["POST"])
-def create_user():
+bp = Blueprint("users", __name__, url_prefix="/users")
+
+
+@bp.route("/create_user", methods = ["POST"])
+def create():
 
     #chama o schemas para validar os dados inseridos
 
@@ -17,7 +15,7 @@ def create_user():
     return jsonify({"message":"usuario criado com sucesso"})
 
 
-@app.route("/login", methods = ["POST"])
+@bp.route("/login", methods = ["POST"])
 def login():
 
     # verifica os dados inseridos
@@ -27,7 +25,7 @@ def login():
     return jsonify({"message":"login realizado com sucesso"})
 
       
-@app.route("/logout", methods = ["GET"])
+@bp.route("/logout", methods = ["GET"])
 def logout():
         
     # verifica se o usuario esta conectado
@@ -37,7 +35,7 @@ def logout():
     return jsonify({"message":"usuario criado com sucesso"})
 
 
-@app.route("/update", methods = ["PUT"])
+@bp.route("/update", methods = ["PUT"])
 def update_user():
      
     # verifica se o usuario esta logado
@@ -51,7 +49,7 @@ def update_user():
     return jsonify({"message":"usuario atualizado com socesso"})
 
 
-@app.route("/delete", methods = ["DELETE"])
+@bp.route("/delete", methods = ["DELETE"])
 def delete_user():
 
     # verifica se o usuario esta logado

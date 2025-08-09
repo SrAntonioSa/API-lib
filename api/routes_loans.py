@@ -1,8 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Blueprint
+
 
 
 app = Flask(__name__)
 
+bp = Blueprint("loans", __name__, url_prefix="/loans")
 
 
 @app.route("/register_loan_book", methods = ["POST"])

@@ -1,12 +1,12 @@
 
-from database import db 
+from models.database import db 
 
 
 
 # creating the user class 
-class User(db.Model,):
+class User(db.Model):
 
-    __tablename__ = "Users"
+    __tablename__ = "users"
 
     #id (int),  user (txt), password (txt)
 
