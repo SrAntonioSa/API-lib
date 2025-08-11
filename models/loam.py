@@ -1,5 +1,5 @@
 from datetime import datetime
-from models.database import db
+from extensions import db
 
 
 class Loan(db.Model):

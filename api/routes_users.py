@@ -1,4 +1,5 @@
 from flask import  jsonify, Blueprint
+from services.user_management import create_user
 
 
 
@@ -8,9 +9,7 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 @bp.route("/create_user", methods = ["POST"])
 def create():
 
-    #chama o schemas para validar os dados inseridos
-
-    #chama a funçao de criar usuario services 
+    create_user()
 
     return jsonify({"message":"usuario criado com sucesso"})
 

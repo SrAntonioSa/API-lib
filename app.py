@@ -1,5 +1,5 @@
 from flask import Flask
-from models.database import db
+from extensions import db
 from api.routes_users import bp as users_bp
 from api.routes_books import bp as books_bp
 from api.routes_loans import bp as loans_bp

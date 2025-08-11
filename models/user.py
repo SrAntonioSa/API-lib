@@ -1,5 +1,5 @@
 
-from models.database import db 
+from extensions import db 
 
 
 
@@ -16,16 +16,7 @@ class User(db.Model):
     email= db.Column(db.String(50),nullable = False, unique= True)
     cpf= db.Column(db.String(12),unique=True, nullable= False)
 
-    # creating a relationship between class user and class loan 
-    # relationship 1:N
-    # loans is a list of loans from this user
 
-
-
-
-
-    # relationship between book and loan
-    
 
 
 
