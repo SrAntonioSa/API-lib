@@ -1,5 +1,6 @@
 from flask import  jsonify, Blueprint
-from services.user_management import create_user
+from services.user_management import create_user, login
+from flask_login import login_required
 
 
 
@@ -15,11 +16,11 @@ def create():
 
 
 @bp.route("/login", methods = ["POST"])
+@login_required
 def login():
 
-    # verifica os dados inseridos
+    login()
 
-    # verifica se o usuario inserido existe 
       
     return jsonify({"message":"login realizado com sucesso"})
 
@@ -49,15 +50,12 @@ def update_user():
 
 
 @bp.route("/delete", methods = ["DELETE"])
+@login_required
 def delete_user():
+    
 
-    # verifica se o usuario esta logado
 
-    # confirma que os dados serao eliminados definitivamente
 
-    # pede a senha
-
-    # elimona o usuario
 
     return jsonify({"message":"usuario eliminado"})
 
