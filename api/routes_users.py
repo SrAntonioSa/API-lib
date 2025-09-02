@@ -11,9 +11,10 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 def create_route():
 
 
-    create_user()
+    return create_user()
 
-    return jsonify({"message":"usuario criado com sucesso"})
+
+
 
 
 @bp.route("/login", methods = ["POST"])

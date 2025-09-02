@@ -1,6 +1,7 @@
 from flask import jsonify, request
 import bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user
+
 from extensions import db
 from models.user import User
 from schemas.validate_name import validate_name
@@ -17,6 +18,7 @@ def create_user():
     email = data.get("email")
     cpf = data.get("cpf")
 
+
     for validator, value in [
         (validate_name, username),
         (validate_email, email),
@@ -25,16 +27,19 @@ def create_user():
     ]:
         error = validator(value)
         if error:
-            return error
+            return jsonify({"error": error}), 400
+
 
 
     if username and password:  
         hashed_password= bcrypt.hashpw(str.encode(password), bcrypt.gensalt())
+        hashed_password = hashed_password.decode("utf-8")
         user = User(username = username, password = hashed_password  , email = email, cpf = cpf )
-        db.session.add(user)
-        db.session.commit()  
+        db.session.add(user) 
+        db.session.commit()
+        return jsonify({"message": f"usuario {username} criado com sucesso"})
 
-    return jsonify({"name": user.name,"email": user.email,"cpf": user.cpf}), 201
+    return jsonify({"message": " dados invalidos"}), 400
 
 def login():
 

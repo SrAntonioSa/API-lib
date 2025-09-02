@@ -1,13 +1,21 @@
 from flask import Flask
 from extensions import db
+from dotenv import load_dotenv
+import os
 from api.routes_users import bp as users_bp
 from api.routes_books import bp as books_bp
 from api.routes_loans import bp as loans_bp
 
+
+load_dotenv()
+
+
+# ...existing code...
 def create_app():
     app = Flask(__name__)
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+  # Exemplo de conexão PostgreSQL:
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
