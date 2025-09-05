@@ -37,7 +37,11 @@ def create_user():
         user = User(username = username, password = hashed_password  , email = email, cpf = cpf )
         db.session.add(user) 
         db.session.commit()
-        return jsonify({"message": f"usuario {username} criado com sucesso"})
+        return jsonify({"message": "usuario criado com sucesso",
+                    "name":f"{username}",
+                    "email":f"{email}",
+                    "cpf":f"{cpf}"
+          })
 
     return jsonify({"message": " dados invalidos"}), 400
 

@@ -16,11 +16,12 @@ firt of all to run the app you need to setup your database preferences, the app,
 
 to run the app:
 on  terminal
-1 python
+1 pip install -r requirements.txt
+2 python
  from extensions import db
  from models import User, Book, Loan
  exit()
-2 flask shell
+3 flask shell
  db.drop_all()
  db.create_all()
  db.session.commit()
