@@ -1,10 +1,10 @@
-
+from flask_login import UserMixin
 from extensions import db 
 
 
 
 # creating the user class 
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     __tablename__ = "users"
 

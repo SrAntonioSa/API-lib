@@ -13,6 +13,18 @@ The "services" folder contains the business rules that will be called when a giv
 
 firt of all to run the app you need to setup your database preferences, the app, user, password and database_name 
 
+you have to install flask 
+setup flask: 
+linux/mac
+export FLASK_APP="app:create_app"
+export FLASK_ENV=development
+
+windows CMD
+set FLASK_APP=app:create_app
+set FLASK_ENV=development
+
+
+
 
 to run the app:
 on  terminal
@@ -22,7 +34,6 @@ on  terminal
  from models import User, Book, Loan
  exit()
 3 flask shell
- db.drop_all()
  db.create_all()
  db.session.commit()
  exit()
