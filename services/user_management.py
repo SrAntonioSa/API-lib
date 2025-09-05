@@ -37,7 +37,7 @@ def create_user():
         user = User(username = username, password = hashed_password  , email = email, cpf = cpf )
         db.session.add(user) 
         db.session.commit()
-        return jsonify({"message": "usuario criado com sucesso",
+        return jsonify({
                     "name":f"{username}",
                     "email":f"{email}",
                     "cpf":f"{cpf}"
@@ -46,23 +46,39 @@ def create_user():
     return jsonify({"message": " dados invalidos"}), 400
 
 def login():
-
+    
     data = request.json
-    username= data.get("username")
+    email = data.get("email")
     password = data.get("password")
 
-    if username and password:
-    #login
-        if username and password:
-            user = User.query.filter_by(username=username).first() # buscando o usuario no bando de dados 
-            # verificando o usuario e a senha encriptada pelo bcrypt, sempre usando o str.encode para transformar a string em bytes 
-            if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
-                login_user(user)#inicia sessao com o usuario
-                print(current_user.is_authenticated)# mostra o usuario atual como logado : is_autenticated = true
-                return jsonify({"message": "Autenticaçao realizada com sucesso"})
+    if not email or not password:
+        return jsonify({"error": "Email e senha são obrigatórios"}), 400
+
+    # busca usuário pelo email
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "Email ou senha incorretos"}), 401
+
+    # verifica senha
+    if not bcrypt.checkpw(password.encode("utf-8"), user.password.encode("utf-8")):
+        return jsonify({"error": "Email ou senha incorretos"}), 401
+
+    # loga o usuário no Flask-Login
+    login_user(user)
+
+    return jsonify({
+        "message": "Login bem-sucedido",
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "cpf": user.cpf
+        }
+    }), 200
 
 
-    return jsonify({"message": "credenciais invalidas"}), 400
+
 
 def update_password():
         
