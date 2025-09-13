@@ -1,3 +1,5 @@
+import uuid
+from sqlalchemy.dialects.postgresql import UUID
 from flask_login import UserMixin
 from extensions import db 
 
@@ -11,6 +13,17 @@ class User(db.Model, UserMixin):
     #id (int),  user (txt), password (txt)
 
     id = db.Column(db.Integer,primary_key=True)
+    uuid = db.Column(
+        db.String(36),
+        unique=True,
+        nullable=False,
+        default=lambda: str(uuid.uuid4())
+    )
+ 
+
+
+
+    
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     email= db.Column(db.String(50),nullable = False, unique= True)
