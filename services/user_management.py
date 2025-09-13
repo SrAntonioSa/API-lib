@@ -68,14 +68,11 @@ def login():
     login_user(user)
 
     return jsonify({
-        "message": "Login bem-sucedido",
-        "user": {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "cpf": user.cpf
-        }
-    }), 200
+            "user": {
+                "username": user.username,
+                "uuid": str(user.uuid)  # garante que sai como string
+            }
+        }), 200
 
 
 
